@@ -12,15 +12,10 @@ public class UserInterface {
     private Dealership dealership;
     private static String fineNameDealership = "inventory.csv";
     private List<Contract> contracts;
-    private ContractFileManager contractFileManager;
+    DataManager dataManager;
 
-    public UserInterface(Dealership dealership) {
-        this.contractFileManager = new ContractFileManager();
-        this.contracts = contractFileManager.loadContracts(dealership);
-    }
-
-    public UserInterface() {
-        this.dealership = DealershipFileManager.getDealership();
+    public UserInterface(DataManager dataManager) {
+        this.dataManager = dataManager;
     }
 
     public void display(){
@@ -101,9 +96,8 @@ public class UserInterface {
     }
 
     public void displayAllVehicle(){
-        for(Vehicle vehicle : dealership.displayAllVehicle()){
-            System.out.println(vehicle);
-        }
+        int dealershipId = Console.PromptForInt("Enter dealership Id: ");
+        dataManager.getAllVehicles(dealershipId).forEach(System.out::println);
     }
 
     public void addVehicle(){
