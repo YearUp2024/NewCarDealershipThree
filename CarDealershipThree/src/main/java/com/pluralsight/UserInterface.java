@@ -28,11 +28,12 @@ public class UserInterface {
             System.out.println("4 - Find vehicles by color");
             System.out.println("5 - Find vehicles by mileage range");
             System.out.println("6 - Find vehicles by type (car, truck, SUV, van)");
-            System.out.println("7 - List ALL vehicles");
-            System.out.println("8 - Add a vehicle");
-            System.out.println("9 - Remove a vehicle");
-            System.out.println("10 - Sell or Lease vehicle");
-            System.out.println("11 - Display Contracts");
+            System.out.println("7 - Find vehicles by VIN");
+            System.out.println("8 - List ALL vehicles");
+            System.out.println("9 - Add a vehicle");
+            System.out.println("10 - Remove a vehicle");
+            System.out.println("11 - Sell or Lease vehicle");
+            System.out.println("12 - Display Contracts");
             System.out.println("99 - Quit");
             options = Console.PromptForInt("Enter your choice: ");
 
@@ -43,11 +44,12 @@ public class UserInterface {
                 case 4 -> processVehicleByColor();
                 case 5 -> processVehicleByMileage();
                 case 6 -> processVehicleByType();
-                case 7 -> displayAllVehicle();
-                case 8 -> addVehicle();
-                case 9 -> removeVehicleByVin();
-                case 10 -> processLeaseVehicle();
-                case 11 -> processSaleVehicle();
+                case 7 -> displayVehicleByVin();
+                case 8 -> displayAllVehicle();
+                case 9 -> addVehicle();
+                case 10 -> removeVehicleByVin();
+                case 11 -> processLeaseVehicle();
+                case 12 -> processSaleVehicle();
             }
         }while(options != 99);
     }
@@ -93,6 +95,12 @@ public class UserInterface {
         for(Vehicle vehicle : dealership.getVehicleByType(vehicleType)){
             System.out.println(vehicle);
         }
+    }
+
+    public void displayVehicleByVin(){
+        int vin = Console.PromptForInt("Enter Vehicle VIN: ");
+        Vehicle vehicle = dataManager.getVehicleByVIN(vin);
+        System.out.println(vehicle);
     }
 
     public void displayAllVehicle(){
